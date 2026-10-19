@@ -1,0 +1,43 @@
+# =========================================================================
+# WebSecLab Optional Local Isolated Practice Environment
+# =========================================================================
+# CAUTION: These containers are intentionally vulnerable applications for
+# local, authorized security training only.
+# Ports are explicitly bound to loopback (127.0.0.1) to prevent external network exposure.
+
+version: '3.8'
+
+services:
+  # 1. OWASP Juice Shop (Modern Vulnerable Web Application)
+  juice-shop:
+    image: bkimminich/juice-shop:v16.0.0
+    container_name: webseclab-juice-shop
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      - NODE_ENV=unsafe
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+
+  # 2. Damn Vulnerable Web Application (DVWA)
+  dvwa:
+    image: vulnerables/web-dvwa:latest
+    container_name: webseclab-dvwa
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:80"
+    environment:
+      - PHP_IDE_CONFIG=serverName=dvwa
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+
+networks:
+  default:
+    driver: bridge
