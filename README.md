@@ -187,6 +187,19 @@ WebSecLab can be deployed on 100% free hosting tiers:
 6. Click **Deploy**. Vercel will build and assign a free HTTPS URL (e.g., `https://webseclab.vercel.app`).
    *Note: `vercel.json` is pre-configured to ensure clean client-side routing across all lab paths.*
 
+### Frontend on Render Free Tier
+1. Push your repository to GitHub.
+2. Sign in to your [Render Dashboard](https://dashboard.render.com).
+3. Click **"New +"** and select **"Static Site"** (or use the pre-configured Blueprint via `render.yaml`).
+4. Connect your GitHub account and select your `webseclab` repository.
+5. Configure the build settings (auto-detected via `render.yaml`):
+   - **Name:** `webseclab`
+   - **Branch:** `main`
+   - **Build Command:** `npm install && npm run build`
+   - **Publish Directory:** `dist`
+6. (Optional) Add environment variables `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`.
+7. Click **"Create Static Site"**. Render will automatically build the site and deploy to a free URL (e.g., `https://webseclab.onrender.com`). Client-side route rewrites are handled automatically via `render.yaml`.
+
 ---
 
 ## 9. Optional Local Docker Practice Lab
